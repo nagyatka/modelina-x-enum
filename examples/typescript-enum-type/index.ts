@@ -20,6 +20,9 @@ const jsonSchemaDraft7 = {
     status: {
       type: 'string',
       const: 'SUCCESS'
+    },
+    position: {
+      type: 'integer',
     }
   }
 };
