@@ -23,10 +23,13 @@ ${this.indent(this.renderBlock(content, 2))}
 
   async renderItems(): Promise<string> {
     const enums = this.model.enum || [];
+    const xEnumNames: Array<string> = this.model.originalInput['x-enumNames'] ?? [];
+    const hasEnumNames = xEnumNames.length === enums.length;
     const items: string[] = [];
-
-    for (const item of enums) {
-      const renderedItem = await this.runItemPreset(item);
+    
+    for (const [index, item] of enums.entries()) {
+      const renderedItem = await this.runItemPreset(
+        hasEnumNames ? {name: xEnumNames[index] , value: item} : item);
       items.push(renderedItem);
     }
 
@@ -89,8 +92,9 @@ export const TS_DEFAULT_ENUM_PRESET: EnumPreset<EnumRenderer> = {
     return renderer.defaultSelf();
   },
   item({ item, renderer }): string {
-    const key = renderer.normalizeKey(item);
-    const value = renderer.normalizeValue(item);
+    const useEnumNames = item.name !== undefined;
+    const key = renderer.normalizeKey(useEnumNames ? item.name : item);
+    const value = renderer.normalizeValue(useEnumNames ? item.value : item);
     return `${key} = ${value},`;
   }
 };

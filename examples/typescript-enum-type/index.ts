@@ -10,6 +10,16 @@ const jsonSchemaDraft7 = {
     event: {
       type: 'string',
       enum: ['ping', 'pong']
+    },
+    command: {
+      $id: 'CommandType',
+      type: 'number',
+      enum: [12, 13],
+      'x-enumNames': ['a', 'b']           
+    },
+    status: {
+      type: 'string',
+      const: 'SUCCESS'
     }
   }
 };
