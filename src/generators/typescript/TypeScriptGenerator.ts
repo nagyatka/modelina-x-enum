@@ -120,7 +120,7 @@ ${modelCode}`;
       return this.renderEnum(model, inputModel);
     }
     case ModelKind.CONST:
-      return this.constRenderType(model, inputModel);
+      return this.renderType(model, inputModel);
     default: return this.renderType(model, inputModel);
     }
   }
@@ -154,14 +154,6 @@ ${modelCode}`;
     const renderer = new TypeRenderer(this.options, this, presets, model, inputModel);
     const result = await renderer.runSelfPreset();
     const renderedName = renderer.nameType(model.$id, model);
-    return RenderOutput.toRenderOutput({result, renderedName, dependencies: renderer.dependencies});
-  }
-
-  async constRenderType(model: CommonModel, inputModel: CommonInputModel): Promise<RenderOutput> {
-    const presets = this.getPresets('type');
-    const renderer = new TypeRenderer(this.options, this, presets, model, inputModel);
-    const result = await renderer.runSelfPreset();
-    const renderedName = (Array.isArray(model.type) ? model.type.join(',') : model.type) ?? '';
     return RenderOutput.toRenderOutput({result, renderedName, dependencies: renderer.dependencies});
   }
 
