@@ -1,0 +1,106 @@
+asyncapi: "2.4.0"
+info:
+  title: "OnRobot Subsystems: Application control"
+  version: "1.0.0"
+  description: "Application control subsystem defines the interface through which the web application and subsystem can communicate"
+servers:
+    rabbitmq-local:
+      url: localhost:5672
+      description: Local RabbitMQ
+      protocol: amqp
+      protocolVersion: "0.9.1"
+
+channels:
+  app/control:
+    publish:
+      operationId: appControlPub
+      description: Application control command
+      message:
+        oneOf:
+          - $ref: "#/components/messages/applicationLoadCommand"
+          #- $ref: "#/components/messages/applicationControlCommand"
+      bindings:
+        amqp:
+          timestamp: true
+          ack: false
+          bindingVersion: 0.2.0
+    subscribe:
+      operationId: appControlSub
+      description: The result of appication control program
+      message:
+        oneOf:
+          - $ref: "#/components/messages/applicationLoadResult"
+          #- $ref: "#/components/messages/applicationStartResult"
+          #- $ref: "#/components/messages/applicationPauseResult"
+          #- $ref: "#/components/messages/applicationStopResult"
+          #- $ref: "#/components/messages/applicationResumeResult"
+    bindings:
+      amqp:
+        is: routingKey
+        exchange:
+          name: appControlExchange
+          type: direct
+          durable: true
+          vhost: /
+        bindingVersion: 0.2.0
+components:
+  messages:
+    # Base execution context
+    ExecutionContext:
+      payload:
+        $id: "ExecutionContext"
+        type: object
+        additionalProperties: false
+        required: ["executionId"]
+        properties:
+          executionId:
+            type: string
+
+
+
+    applicationLoadCommand:
+      payload:
+        type: object
+        # https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.8.2.2
+        $id: "ApplicationLoadCommand"
+
+        additionalProperties: false
+        $schema: 'https://json-schema.org/draft/2020-12/schema'
+        required: ["command", "initialActions", "actions"]
+        properties:
+          command:
+            $id: Load
+            type: string
+            const: "load"
+          initialActions:
+            type: array
+          actions:
+            type: array
+
+    applicationLoadResult:
+        payload:
+          # $id field is used to define the interface name
+          $id: "ApplicationLoadResult"
+          allOf: 
+            - $ref: "#/components/messages/ExecutionContext"
+            - type: object
+              additionalProperties: false
+              required: ["result"]
+              properties:
+                result:
+                  # $id field is used to define the interface or enum name
+                  $id: ApplicationLoadResultType
+                  enum:
+                    - 0
+                    - 1
+                  # x-enumNames is our extension field that makes possible the usage of named enum values
+                  x-enumNames:
+                    - SUCCESS
+                    - ERROR_LOADING
+
+
+
+
+
+
+
