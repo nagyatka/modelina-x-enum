@@ -56,8 +56,6 @@ components:
           executionId:
             type: string
 
-
-
     applicationLoadCommand:
       payload:
         type: object
