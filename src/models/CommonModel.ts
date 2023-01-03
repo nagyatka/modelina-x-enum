@@ -323,7 +323,7 @@ export class CommonModel {
     const dependsOn = [];
 
     if (this.$ref !== undefined) {
-      return [this.$ref];
+      return Array.isArray(this.$ref) ? this.$ref : [this.$ref];
     }
 
     if (this.additionalProperties !== undefined) {

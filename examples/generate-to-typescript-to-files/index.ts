@@ -7,10 +7,8 @@ const generator = new TypeScriptFileGenerator({
   enumType: 'enum', 
   modelType: 'interface',
 });
-
-//const input = load(fs.readFileSync('./examples/generate-to-typescript-to-files/onrobot-application-control.yaml', 'utf8'));
-
-const input = load(fs.readFileSync('onrobot-application-control.yaml', 'utf8'));
+const input = load(fs.readFileSync(`${__dirname }/onrobot-application-control.yaml`, 'utf8'));
+// const input = load(fs.readFileSync('onrobot-application-control.yaml', 'utf8'));
 
 export async function generate() : Promise<void> {
   const parsedDoc = await parse(JSON.stringify(input));
