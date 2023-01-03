@@ -8,6 +8,7 @@ export class CommonModel {
   originalInput?: any;
   $id?: string;
   type?: string | string[];
+  unionType?: { [key: string]: CommonModel; };
   enum?: any[];
   items?: CommonModel | CommonModel[];
   properties?: { [key: string]: CommonModel; };
@@ -227,6 +228,12 @@ export class CommonModel {
     }
   }
 
+  addUnionType(typeName: string | undefined, model: CommonModel): void {
+    if (!typeName) {return;}
+    if (this.unionType === undefined) {this.unionType = {};}
+    this.unionType[String(typeName)] = model;
+  }
+
   /**
    * Adds a property to the model.
    * If the property already exist the two are merged.
@@ -323,7 +330,10 @@ export class CommonModel {
     const dependsOn = [];
 
     if (this.$ref !== undefined) {
-      return Array.isArray(this.$ref) ? this.$ref : [this.$ref];
+      if (this.$ref.startsWith('__UNION')) {
+        return this.$ref.split('=')[1].split('|');
+      }
+      return [this.$ref];
     }
 
     if (this.additionalProperties !== undefined) {

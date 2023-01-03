@@ -1,6 +1,6 @@
 import { CommonModel } from '../models';
 import { Logger } from '../utils';
-import { isEnum, isModelObject } from './Utils';
+import { isEnum, isModelObject, isUnionType } from './Utils';
 /**
  * Post process the interpreted model. By applying the following:
  * - Ensure models are split as required
@@ -25,6 +25,10 @@ function trySplitModels(model: CommonModel, splitModels: CommonModel[], iterated
     Logger.info(`Splitting model ${model.$id || 'any'} since it should be on its own`);
     const switchRootModel = new CommonModel();
     switchRootModel.$ref = model.$id;
+    if (isUnionType(model)) {
+      switchRootModel.unionType = model.unionType;
+      switchRootModel.$ref = `__UNION=${Object.keys(model.unionType ?? {}).join('|')}`;
+    }
     modelToReturn = switchRootModel;
     if (!splitModels.includes(model)) {
       splitModels.push(model);

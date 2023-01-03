@@ -52,6 +52,9 @@ export abstract class TypeScriptRenderer extends AbstractRenderer<TypeScriptOpti
     if (Array.isArray(model)) {
       return model.map(t => this.renderType(t)).join(' | ');
     }
+    if (model.unionType !== undefined) {
+      return Object.keys(model.unionType).join(' | ');
+    }
     if (model.enum !== undefined) {
       return model.enum.map(value => typeof value === 'string' ? `"${value}"` : value).join(' | ');
     }

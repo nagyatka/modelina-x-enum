@@ -27,6 +27,13 @@ export function isModelObject(model: CommonModel) : boolean {
   return false;
 }
 
+export function isUnionType(model: CommonModel) : boolean {
+  if (model.unionType !== undefined) {
+    return true;
+  }
+  return false;
+}
+
 /**
  * Infers the JSON Schema type from value
  * 

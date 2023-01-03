@@ -281,6 +281,10 @@ export class JsonSchemaInputProcessor extends AbstractInputProcessor {
             Logger.warn(`Overwriting existing model with $id ${commonModel.$id}, are there two models with the same id present?`, commonModel);
           }
           commonModelsMap[commonModel.$id] = commonModel;
+        } else if (commonModel.unionType) {
+          for (const [typeName, unionTypeModel] of Object.entries(commonModel.unionType)) {
+            commonModelsMap[String(typeName)] = unionTypeModel;
+          }
         } else {
           Logger.warn('Model did not have $id, ignoring.', commonModel);
         }
