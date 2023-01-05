@@ -2,6 +2,7 @@ node_modules
 .vscode
 coverage
 *.DS_Store
+lib
 
 onrobot-*
 output
