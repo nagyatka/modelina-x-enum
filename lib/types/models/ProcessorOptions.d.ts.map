@@ -1,0 +1,1 @@
+{"version":3,"file":"ProcessorOptions.d.ts","sourceRoot":"","sources":["../../../src/models/ProcessorOptions.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,aAAa,EAAE,MAAM,kBAAkB,CAAC;AACjD,OAAO,EAAE,+BAA+B,EAAE,MAAM,qBAAqB,CAAC;AAEtE,MAAM,WAAW,gBAAgB;IAC/B,QAAQ,CAAC,EAAE,aAAa,CAAC;IACzB,UAAU,CAAC,EAAE,+BAA+B,CAAC;CAC9C"}

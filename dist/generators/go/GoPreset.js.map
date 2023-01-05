@@ -1,1 +1,0 @@
-{"version":3,"file":"GoPreset.js","sourceRoot":"","sources":["../../../src/generators/go/GoPreset.ts"],"names":[],"mappings":";;;AAGA,+DAAsF;AACtF,2DAAgF;AAEhF,IAAY,SAIX;AAJD,WAAY,SAAS;IACnB,2CAAK,CAAA;IACL,qEAAkB,CAAA;IAClB,mEAAiB,CAAA;AACnB,CAAC,EAJW,SAAS,GAAT,iBAAS,KAAT,iBAAS,QAIpB;AAgBY,QAAA,iBAAiB,GAAa;IACzC,MAAM,EAAE,yCAAwB;IAChC,IAAI,EAAE,qCAAsB;CAC7B,CAAC"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"StructRenderer.d.ts","sourceRoot":"","sources":["../../../../../src/generators/go/renderers/StructRenderer.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,eAAe,CAAC;AAC3C,OAAO,EAAa,YAAY,EAAE,MAAM,aAAa,CAAC;AAEtD;;;;GAIG;AACH,qBAAa,cAAe,SAAQ,UAAU;IAC/B,WAAW,IAAI,OAAO,CAAC,MAAM,CAAC;CAc5C;AAED,eAAO,MAAM,wBAAwB,EAAE,YAAY,CAAC,cAAc,CAYjE,CAAC"}

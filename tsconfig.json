@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
+    "outDir": "./lib/cjs",
     "baseUrl": "./src",
     "declaration": false,
     "target": "es6",
